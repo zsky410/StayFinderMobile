@@ -1,13 +1,17 @@
 import { useMemo } from "react";
 import { ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { Button, Separator, Text, XStack, YStack } from "tamagui";
 import { exploreCards, featuredStays, filterChips, recentSearches } from "../data/homeData";
+import { RootTabParamList } from "../types/navigation";
 
 export function HomeScreen() {
   const insets = useSafeAreaInsets();
   const chips = useMemo(() => filterChips, []);
+  const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
 
   return (
     <YStack flex={1} backgroundColor="#f2f9f5">
@@ -24,7 +28,7 @@ export function HomeScreen() {
             <Text color="#5f7f80" fontSize={24} flex={1}>
               ✨  Nhập yêu cầu...
             </Text>
-            <Button size="$3" backgroundColor="#0f7b83" borderRadius={999}>
+            <Button size="$3" backgroundColor="#0f7b83" borderRadius={999} onPress={() => navigation.navigate("Search")}>
               <Text color="white" fontWeight="700">
                 Tìm kiếm
               </Text>
